@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\begin{document}
+
+\underline{Liens utiles}
+\begin{itemize}
+	\item \url{https://www.youtube.com/watch?v=X8jsijhllIA&t=522s}
+	\item \url{https://www.youtube.com/watch?v=b3NxrZOu_CE}\\
+\end{itemize}
+	
+\begin{center}
+	\rule{0.5\linewidth}{1pt}
+\end{center}
+
+\underline{Mardi 24 septembre} : Création des premières fonction en C \\
+
+\begin{center}
+	\rule{0.5\linewidth}{1pt}
+\end{center}
+
+
+\underline{Mardi 1 Octobre} : Création de la première fonction qui va permettre de manipuler des tableaux de bits pour les encoder avec Hamming. \\
+
+\textbf{formatage(tb* t)} qui permet de préparer le tableau avec des bits supplémentaires réservés pour la correction. Ces derniers sont placés tous les $2^k$ et sont initialisés à $-1$ par défaut.\\
+
+\begin{center}
+	\rule{0.5\linewidth}{1pt}
+\end{center}
+
+\underline{Mardi 8 Octobre} : Création des fonctions qui permettent de générer les tableaux formatés avec les bits de parité adéquats.\\
+
+\textbf{ajoute\textunderscore correcteurs(tb* t)} permet de déterminer puis placer les bits correcteurs correspondants.\\\\
+On peut alors remarquer que les bits permettant de calculer $b_1$ ont tous une écriture binaire qui termine par un $1$. 
+Pour $b_2$ il faut regarder les $1$ présents sur l'avant dernier bit.
+On procède de même pour les bits de correction restant grâce à un décalage vers la gauche de la suite de bit qui sert de masque.\\\\
+Les résultats des tests sont conformes à ce qui est attendu. \\
+
+\begin{center}
+	\rule{0.5\linewidth}{1pt}
+\end{center}
+
+\underline{Notes} : 
+\begin{itemize}
+	\item faire des tests sur des tableaux plus grands (256 bits par exemple) et observer les résultats.
+\end{itemize}
+\end{document}
