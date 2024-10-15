@@ -17,7 +17,6 @@ void free_tb(tb* t){
     free(t);
 }
 
-
 tb* tableau_aleatoire_bit(int n){
     srand(time(NULL));
     tb * tableau = malloc(sizeof(tb));
@@ -106,22 +105,43 @@ void ajoute_correcteurs(tb* t){
     }
 }
 
+int verification(tb* t){
+    int b = 0; 
+
+    for(int i = 1; i < t->taille; i++){
+        if(t->donnees[i] == 1 ){
+            b = b ^ i;
+        }
+    }
+    return b;
+}
 
 int main(){
-    
-    tb* tableau = tableau_aleatoire_bit(12);
+    int taille = 12;
+    tb* tableau = tableau_aleatoire_bit(taille);
 
     printf("\n\n_____________________________________________________\n\n");
 
     printf("Tableau original :\n\n");
-    print_tableau(tableau, 4);
+    print_tableau(tableau, ceil(sqrt(taille)));
 
     tb* nouv_t = formatage(tableau);
 
     ajoute_correcteurs(nouv_t);
     
     printf("\n\nTableau après modifications :\n\n");
-    print_tableau(nouv_t, 4);
+    print_tableau(nouv_t, ceil(sqrt(taille) )); 
+    // 'ceil' sert à faire un arrondi supérieur : si on a un tableau de 8 elem : on fait un tab 3x3 avec la case N-E vide
+
+    printf("Résultat de la verif : %i\n\n", verification(nouv_t));
+
+    nouv_t->donnees[9] = 1^(nouv_t->donnees[9]); // on créé volontairement une erreur sur la case 9
+    nouv_t->donnees[12] = 1^(nouv_t->donnees[12]); // idem en 12
+
+    print_tableau(nouv_t, ceil(sqrt(taille) ));
+
+    printf("Résultat de la verif après modification : erreur placé au n°%d", verification(nouv_t));
+
     free_tb(nouv_t);
 
     printf("\n\n_____________________________________________________\n\n");
