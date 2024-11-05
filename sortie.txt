@@ -4,43 +4,42 @@ _____________________________________________________
 
 Tableau original :
 
-0	1	1	1	
-0	1	1	0	
-1	1	1	1	
+0	0	0	0	
+1	1	0	1	
+0	0	0	
 
 
-
-Le bit correcteur placé en 1 se base sur les cases :	3 5 7 9 11 13 15 
+Le bit correcteur placé en 1 se base sur les cases :	3 5 7 9 11 13 
 	Bit correcteur placé en 1 initialisé à 1
 
 
-Le bit correcteur placé en 2 se base sur les cases :	3 6 7 10 11 14 15 
+Le bit correcteur placé en 2 se base sur les cases :	3 6 7 10 11 14 
 	Bit correcteur placé en 2 initialisé à 1
 
 
-Le bit correcteur placé en 4 se base sur les cases :	5 6 7 12 13 14 15 
-	Bit correcteur placé en 4 initialisé à 0
+Le bit correcteur placé en 4 se base sur les cases :	5 6 7 12 13 14 
+	Bit correcteur placé en 4 initialisé à 1
 
 
-Le bit correcteur placé en 8 se base sur les cases :	9 10 11 12 13 14 15 
+Le bit correcteur placé en 8 se base sur les cases :	9 10 11 12 13 14 
 	Bit correcteur placé en 8 initialisé à 0
 
 
 Tableau après modifications :
 
-0	1	1	1	
 0	1	1	0	
-0	1	1	0	
-1	1	1	1	
+1	0	0	1	
+0	1	0	1	
+0	1	1	
+Résultat de la verif (0 si tout est conforme) : 0
 
-Résultat de la verif : 0
+Valeur en case n°8 changée
+Valeur en case n°2 changée
+0	1	0	0	
+1	0	0	1	
+1	1	0	1	
+0	1	0	
 
-0	1	1	1	
-0	1	1	0	
-0	0	1	0	
-0	1	1	1	
-
-Résultat de la verif après modification : erreur placé au n°5
 
 _____________________________________________________
 

@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <math.h>
+#include <time.h>
 
 struct tb { /*tableau de bits*/
     int* donnees;
@@ -116,7 +117,32 @@ int verification(tb* t){
     return b;
 }
 
+bool est_present(int* t, int taille, int k){
+    for (int i = 0; i < taille; i++){
+        if (t[i] == k){
+            return true;
+        }
+    }
+    return false;
+} 
+
+void ajout_erreur(tb* t, int nb_erreurs){
+    int* indices = (int*)malloc(sizeof(int)*nb_erreurs);
+    for(int i = 0; i < nb_erreurs; i++){
+
+        int a_changer = rand()%(t->taille);
+        while(est_present(indices, nb_erreurs, a_changer)){
+            a_changer = rand()%(t->taille);
+        }
+        t->donnees[a_changer] = t->donnees[a_changer] ^ 1;
+        indices[i] = a_changer;
+        printf("Valeur en case n°%i changée\n", a_changer);
+    }
+    free(indices);
+}
+
 int main(){
+    srand(time(NULL));
     int taille = 12;
     tb* tableau = tableau_aleatoire_bit(taille);
 
@@ -133,14 +159,11 @@ int main(){
     print_tableau(nouv_t, ceil(sqrt(taille) )); 
     // 'ceil' sert à faire un arrondi supérieur : si on a un tableau de 8 elem : on fait un tab 3x3 avec la case N-E vide
 
-    printf("Résultat de la verif : %i\n\n", verification(nouv_t));
+    printf("Résultat de la verif (0 si tout est conforme) : %i\n\n", verification(nouv_t));
 
-    nouv_t->donnees[9] = 1^(nouv_t->donnees[9]); // on créé volontairement une erreur sur la case 9
-    nouv_t->donnees[12] = 1^(nouv_t->donnees[12]); // idem en 12
+    ajout_erreur(nouv_t, 2);
 
     print_tableau(nouv_t, ceil(sqrt(taille) ));
-
-    printf("Résultat de la verif après modification : erreur placé au n°%d", verification(nouv_t));
 
     free_tb(nouv_t);
 
@@ -148,3 +171,7 @@ int main(){
     
     return 0;
 }
+
+
+// nouv_t->donnees[9] = 1^(nouv_t->donnees[9]); // on créé volontairement une erreur sur la case 9
+// nouv_t->donnees[12] = 1^(nouv_t->donnees[12]); // idem en 12
