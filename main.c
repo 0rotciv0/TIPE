@@ -141,9 +141,13 @@ void ajout_erreur(tb* t, int nb_erreurs){
     free(indices);
 }
 
+
+
+
+
 int main(){
     srand(time(NULL));
-    int taille = 12;
+    int taille = 8;
     tb* tableau = tableau_aleatoire_bit(taille);
 
     printf("\n\n_____________________________________________________\n\n");
@@ -167,6 +171,13 @@ int main(){
 
     free_tb(nouv_t);
 
+
+
+
+
+    // printf("\n\n%i", ascii);
+
+
     printf("\n\n_____________________________________________________\n\n");
     
     return 0;
@@ -175,3 +186,6 @@ int main(){
 
 // nouv_t->donnees[9] = 1^(nouv_t->donnees[9]); // on créé volontairement une erreur sur la case 9
 // nouv_t->donnees[12] = 1^(nouv_t->donnees[12]); // idem en 12
+
+
+//stéganographie
