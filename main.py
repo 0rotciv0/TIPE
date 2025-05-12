@@ -14,4 +14,6 @@ def stegano (image : "str", k : int, chemin : "str") :
 # stegano("meditation.jpg", 6, "strasbourgeoise.txt")
 
 stegano("terre.jpg", 7, "romeo_et_juliette.txt")
+#stegano("cafe.jpg", 7, "strasbourgeoise.txt")
+
 

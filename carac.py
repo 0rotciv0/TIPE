@@ -15,7 +15,7 @@ def string_to_bin(s : str):
 def string_to_bin_string(chaine : str): 
     s = ""
     for carac in chaine :
-        s = s + char_to_bin(carac)
+        s = s + bin(ord(carac))[2:].zfill(8)
     return s
 
 # Conversion de binaire vers caractère ASCII
@@ -28,6 +28,7 @@ def bin_to_string(t : list):
     for nb in t :
         chaine += bin_to_char(nb)
     return chaine 
+
 
 def partitionner_4_string(s : str) : 
     l = string_to_bin(s) 
