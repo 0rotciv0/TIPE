@@ -4,8 +4,8 @@ from carac import string_to_bin_string
 from hamming import encoder
 from fichier_txt import texte_from_txt
 
-def stegano (image : "str", k : int, chemin : "str") :  
-    remplacer_k_bits_upgrade(ouvrir(image), k, texte_from_txt(chemin)) 
+def stegano (image : "str", k : int, chemin : str, caractere_fin : str) :  
+    remplacer_k_bits_upgrade(ouvrir(image), k, texte_from_txt(chemin), caractere_fin) 
 
 
 # for i in range (2,9):
@@ -13,7 +13,9 @@ def stegano (image : "str", k : int, chemin : "str") :
 #     stegano("terre.jpg", i, "romeo_et_juliette.txt")
 # stegano("meditation.jpg", 6, "strasbourgeoise.txt")
 
-stegano("terre.jpg", 7, "romeo_et_juliette.txt")
+#stegano("terre.jpg", 7, "romeo_et_juliette.txt", "11110000")
+stegano("terre.jpg", 4, "Fahrenheit.txt", "11110000")
+
 #stegano("cafe.jpg", 7, "strasbourgeoise.txt")
 
 

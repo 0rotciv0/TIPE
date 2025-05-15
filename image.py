@@ -52,9 +52,9 @@ def remplacer_k_bits(img, k:int, chaine:str):
     new = Image.new("RGB", (largeur,hauteur), "white")
     s = string_to_bin_string(chaine)
 
-    print(len(s))
+    #print(len(s))
     #print(s)
-    print(largeur*hauteur*3*k)
+    #print(largeur*hauteur*3*k)
     # assert(len(s) <= largeur*hauteur*3*k)
 
     for i in range(hauteur):
@@ -71,30 +71,44 @@ def remplacer_k_bits(img, k:int, chaine:str):
     afficher(new)
 
 
-def remplacer_k_bits_upgrade(img, k:int, chaine:str):
+def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
     largeur, hauteur = img.size
     new = img.copy()
-    s = string_to_bin_string(chaine)
+    s = string_to_bin_string(chaine) + str(caractere_fin)
+    print(f"chaine cachée : {s}\n\n\n")
 
-    print(f"nombre de bits à dissimuler : {len(s)}")
+    #print(f"nombre de bits à dissimuler : {len(s)}")
     #print(s)
-    print(f"nombre de bits disponibles à la dissimulation : {largeur*hauteur*3*k}")
+    #print(f"nombre de bits disponibles à la dissimulation : {largeur*hauteur*3*k}")
     assert(len(s) <= largeur*hauteur*3*k)
     indice = 0
+
     while(s!=""):
-        i = indice % largeur
-        j = indice // largeur 
+        i = indice % largeur #abscisse
+        j = indice // largeur #ordonnée
         #print(i,j)
         pixel = img.getpixel((i,j))
+        #print(f"pixel de base en ({i},{j}) : {pixel}")
 
-        k_bits_fois_trois = s[:k*3] #on prend les k premiers bits à cacher
+        k_bits_fois_trois = s[:k*3]#on prend les k premiers bits à cacher
+        #print(f"à ajouter : {k_bits_fois_trois}")
 
         s = s[k*3:] #on enleve les k premiers bits
 
-        nouv_pixel = conversion_data_chaine(pixel, k, k_bits_fois_trois)
+        nouv_pixel = ["","",""]
+        for m in range(3):
+            a , b = format(pixel[m], "08b") , k_bits_fois_trois[m*k:(m+1)*k]
+            #print(f"en binaire : {a} puis {a[:8-k]}")
+            
+            nouv_pixel[m] = a[:8-k] + b
+            #print(f"on rajoute {b} ce qui donne {nouv_pixel[m]}")
 
-        new.putpixel((i,j), nouv_pixel)
+            nouv_pixel[m] = int(nouv_pixel[m],2)
+            #print(f"puis en décimal : {nouv_pixel[m]}")
+        #print()
+        new.putpixel((i,j), tuple(nouv_pixel))
         indice += 1
 
+    print(indice % largeur, indice // largeur)
     afficher(new)
 
