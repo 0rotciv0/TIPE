@@ -75,7 +75,7 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
     largeur, hauteur = img.size
     new = img.copy()
     s = string_to_bin_string(chaine) + str(caractere_fin)
-    print(f"chaine cachée : {s}\n\n\n")
+    #print(f"chaine cachée : {s}\n\n\n")
 
     #print(f"nombre de bits à dissimuler : {len(s)}")
     #print(s)
@@ -100,7 +100,11 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
             a , b = format(pixel[m], "08b") , k_bits_fois_trois[m*k:(m+1)*k]
             #print(f"en binaire : {a} puis {a[:8-k]}")
             
-            nouv_pixel[m] = a[:8-k] + b
+            if b != "" :
+                nouv_pixel[m] = a[:8-k] + b
+            else :
+                nouv_pixel[m] = a
+                
             #print(f"on rajoute {b} ce qui donne {nouv_pixel[m]}")
 
             nouv_pixel[m] = int(nouv_pixel[m],2)
@@ -109,6 +113,7 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
         new.putpixel((i,j), tuple(nouv_pixel))
         indice += 1
 
-    print(indice % largeur, indice // largeur)
+    print(f"dernier pixel en ligne {indice // largeur} et colonne {indice % largeur}")
     afficher(new)
+    new.save(f"tests/r&j/test_{k}.jpg")
 

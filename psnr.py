@@ -23,7 +23,6 @@ def psnr(i1 : str, i2 : str):
     return f"""Le rapport PSNR entre les images "{i1}" et "{i2}" vaut {255/x} (= {10*log10(255/x)} dB)"""
 
 
-print(psnr("terre.jpg", "terre.jpg"))
-for i in range(2,9):
-    print(psnr("terre.jpg", f"tests/terre_{i}.jpg"))
+print(psnr("C:/Github/TIPE/tests/f_7.PNG", "C:/Github/TIPE/terre.jpg"))
+
 
