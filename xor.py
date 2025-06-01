@@ -1,9 +1,20 @@
-def chiffrement (cle : str, chaine : str): #les entrées sont à fournir en binaire
-    nouvChaine = ""
+def xor(chaine : str, cle: str):
+    n = len(chaine)
+    assert(n <= len(cle))
+    result = ""
+
+    for i in range(n):
+        result += str(int(chaine[i])^int(cle[i]))
+
+    return result
+
+
+def chiffrement(chaine : str, cle : str):
     n = len(cle)
-    for i in range(len(chaine)):
-        nouvChaine += str( int(chaine[i])^int(cle[i%(n)]) )
+    result = ""
+    for i in range(0, len(chaine), n):
+        bloc = chaine[i:i+n]
+        
+        result += xor(bloc, cle)
 
-    return nouvChaine
-
-print(chiffrement("101","0010101111"))
+    return result

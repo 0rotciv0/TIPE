@@ -1,6 +1,7 @@
 from PIL import Image
 from carac import string_to_bin_string
-import time #pour calculer les durées d'exécution du programme
+from xor import chiffrement
+from hamming import hamming_8_4
 
 def ouvrir(s):
     return Image.open(s)
@@ -71,10 +72,26 @@ def remplacer_k_bits(img, k:int, chaine:str):
     afficher(new)
 
 
-def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
+def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str, xor : str, hamming : bool):
     largeur, hauteur = img.size
     new = img.copy()
     s = string_to_bin_string(chaine) + str(caractere_fin)
+
+    if xor != "" : 
+        s = chiffrement(s, xor)
+
+    if hamming : 
+        nouv_s = ""
+        for i in range(0,int(len(s)/4)+1):
+            bloc = s[4*i : 4*(i+1)]
+            if len(bloc) == 4 :
+                nouv_s += hamming_8_4(bloc)
+            else : 
+                nouv_s += bloc
+
+        s = nouv_s
+
+
     #print(f"chaine cachée : {s}\n\n\n")
 
     #print(f"nombre de bits à dissimuler : {len(s)}")
@@ -115,5 +132,5 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str):
 
     print(f"dernier pixel en ligne {indice // largeur} et colonne {indice % largeur}")
     afficher(new)
-    new.save(f"tests/r&j/test_{k}.jpg")
+    #new.save(f"tests/r&j/test_{k}.jpg")
 
