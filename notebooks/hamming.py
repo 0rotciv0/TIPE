@@ -13,7 +13,8 @@ def hamming_8_4(s:str):
     r = 0
     for i in range(7):
         r= r^int(x[i])
-    return x + str(r)
+    return str(r)+x
+
 
 def décodage_8_4(s:str):
     assert(len(s)==8)
@@ -28,22 +29,38 @@ def décodage_8_4(s:str):
     s3 = int(s[3]) ^ int(s[4]) ^ int(s[5]) ^ int(s[6])
 
     syndrome = str(s3) + str(s2) + str(s1)
+    #print(syndrome)
 
     if g != int(s[7]) : 
+        #print("Le nombre d'erreur est impair")
 
         i = int(syndrome,2)
+        #print(f"si l'erreur est unique, elle se trouve en position {i}.")
         s = s[:i-1] + str(int(s[i-1])^1) + s[i:]
+        #print(f"La nouvelle chaine est alors {s} ")
+        #print("Erreur corrigée")
 
+        
+    # else : 
 
-    return s[2] + s[4] + s[5] + s[6]
+    #     #print("Le nombre d'erreur est pair")
+
+    #     if syndrome == "000" : 
+    #         print("Il n'y a pas d'erreur.")
+    #         return s
+    #     else: 
+    #         #print("Le nombre d'erreur est strictement supérieur à 1.")
+            
+    #         print("Erreur non corrigée")
+
+    return s[2]+s[4]+s[5]+s[6] 
 
 def decodage_chaine(s:str):
     result = ""
     n = 0
- 
+
     while n < len(s)//8:
-        bloc = s[(n*8):(n+1)*8]
-        #print(f"bloc n°{n} : {bloc}")
+        bloc = s[n:n+8]
         result += décodage_8_4(bloc)
         n += 1
 

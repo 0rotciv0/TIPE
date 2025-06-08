@@ -10,7 +10,8 @@ def stegano (image : "str", k : int, chemin : str, caractere_fin : str, xor: str
 
 
 
-stegano("terre.jpg", 7, "Fahrenheit.txt", "11110000", "101", True)
+# stegano("terre.jpg", 7, "strasbourgeoise.txt", "11110000", "101", True)
+stegano("terre.jpg", 7, "les3.txt", "11110000", "101", False)
 
 
 

@@ -80,6 +80,7 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str, xor : 
     if xor != "" : 
         s = chiffrement(s, xor)
 
+
     if hamming : 
         nouv_s = ""
         for i in range(0,int(len(s)/4)+1):
@@ -89,7 +90,15 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str, xor : 
             else : 
                 nouv_s += bloc
 
-        s = nouv_s
+        s = nouv_s  
+
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    # print(s)
 
 
     #print(f"chaine cachée : {s}\n\n\n")
@@ -101,21 +110,22 @@ def remplacer_k_bits_upgrade(img, k:int, chaine:str, caractere_fin : str, xor : 
     indice = 0
 
     while(s!=""):
-        i = indice % largeur #abscisse
-        j = indice // largeur #ordonnée
-        #print(i,j)
+        i = indice % largeur #abscisses
+        j = indice // largeur #ordonnées
+
+        # print(i,j)
         pixel = img.getpixel((i,j))
         #print(f"pixel de base en ({i},{j}) : {pixel}")
 
         k_bits_fois_trois = s[:k*3]#on prend les k premiers bits à cacher
-        #print(f"à ajouter : {k_bits_fois_trois}")
+        # print(f"à ajouter : {k_bits_fois_trois}")
 
         s = s[k*3:] #on enleve les k premiers bits
 
         nouv_pixel = ["","",""]
         for m in range(3):
             a , b = format(pixel[m], "08b") , k_bits_fois_trois[m*k:(m+1)*k]
-            #print(f"en binaire : {a} puis {a[:8-k]}")
+            # print(f"ajouté en ({i,j}) : {b}")
             
             if b != "" :
                 nouv_pixel[m] = a[:8-k] + b
